@@ -1,0 +1,16 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX scco: <http://rdf.ebi.ac.uk/terms/surechembl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+
+CONSTRUCT {
+        ?surechembl_disease skos:exactMatch ?mesh_uri
+} WHERE {
+        GRAPH <http://www.ebi.ac.uk/surechembl> {
+                ?surechembl_disease a scco:SCCO_000036 .
+        }
+        BIND (STRAFTER(STR(?surechembl_disease), "http://rdf.ebi.ac.uk/resource/surechembl/indication/") AS ?mesh_id)
+        FILTER (REGEX(?mesh_id, "^(C\\d{6}|D0\\d{5})$")) 
+        BIND (URI(CONCAT("http://id.nlm.nih.gov/mesh/",?mesh_id)) AS ?mesh_uri)
+}
+
