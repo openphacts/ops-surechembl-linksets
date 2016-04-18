@@ -1,0 +1,17 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX scco: <http://rdf.ebi.ac.uk/terms/surechembl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+
+CONSTRUCT {
+        ?surechembl_target skos:exactMatch ?hgncsym
+} WHERE {
+        GRAPH <http://www.ebi.ac.uk/surechembl> {
+                ?surechembl_target a scco:SCCO_000035 .
+        }
+        BIND (STRAFTER(STR(?surechembl_target), "http://rdf.ebi.ac.uk/resource/surechembl/target/") AS ?id)
+        BIND (URI(CONCAT("http://identifiers.org/hgnc.symbol/",?id)) AS ?hgncsym)
+        GRAPH <http://data.openphacts.org/dev/2.1/ims/linksets/data/ops-hgnc-linkset/hgnc-to-hgnc.symbol-linkset.ttl> {
+          ?hgnc skos:exactMatch ?hgncsym .
+        }
+}
