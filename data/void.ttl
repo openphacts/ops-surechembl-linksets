@@ -105,8 +105,8 @@
 <../sparql/surechembl_mesh.sparql> a wf4ever:Script ;
 	pav:createdBy <http://orcid.org/0000-0001-9842-9718> ;
 	pav:authoredBy <http://orcid.org/0000-0001-9842-9718> ;
-	pav:createdOn "2016-04-06T13:02:00+01:00"^^xsd:dateTime ;
-	pav:authoredOn "2016-04-06T13:02:00+01:00"^^xsd:dateTime ;
+	pav:createdOn "2016-04-06T17:00:00+01:00"^^xsd:dateTime ;
+	pav:authoredOn "2016-04-06T17:00:00+01:00"^^xsd:dateTime ;
 	dcterms:format sd:SPARQL11Query ;
 	dcterms:title "SureChEMBL-MeSH generation SPARQL query" ;
 	wf4ever:script """
@@ -122,8 +122,8 @@ CONSTRUCT {
                 ?surechembl_disease a scco:SCCO_000036 .
         }
         BIND (STRAFTER(STR(?surechembl_disease), "http://rdf.ebi.ac.uk/resource/surechembl/indication/") AS ?mesh_id)
-        FILTER (REGEX(?mesh_id, "^(C\\d{6}|D0\\d{5})$"))
-        BIND (URI(CONCAT("http://id.nlm.nih.gov/mesh/",?mesh_id)) AS ?mesh_uri)
+        FILTER (REGEX(?mesh_id, "^(C|D)\\d{6}$"))
+        BIND (URI(CONCAT("http://identifiers.org/mesh/",?mesh_id)) AS ?mesh_uri)
 }
 """;
 	dcterms:license <http://www.apache.org/licenses/LICENSE-2.0> .
@@ -175,10 +175,15 @@ meshvoid:MeSHRDF a void:Dataset ;
 	foaf:isPrimaryTopicOf <ftp://ftp.nlm.nih.gov/online/mesh/void_0.9.3.ttl>, <http://id.nlm.nih.gov/mesh/void> ;
 	pav:version "0.9.3" ;
 	void:dataDump <ftp://ftp.nlm.nih.gov/online/mesh/2016/mesh2016.nt.gz> ;
-	void:uriSpace "http://id.nlm.nih.gov/mesh/" .
+	void:uriSpace "http://identifiers.org/mesh/" .
+  # Workaround for IMS being silly and not recognizing the below
+	#void:uriSpace "http://id.nlm.nih.gov/mesh/" .
+
 
 <http://id.nlm.nih.gov/mesh/void> pav:hasVersion <ftp://ftp.nlm.nih.gov/online/mesh/void_0.9.3.ttl> ;
 	pav:version "0.9.3" .
+
+
 
 :hgnc_symbols a void:Dataset ;
   pav:version "0.0.20160407-20160418.103208-3" ;

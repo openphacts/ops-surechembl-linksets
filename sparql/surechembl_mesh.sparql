@@ -10,7 +10,6 @@ CONSTRUCT {
                 ?surechembl_disease a scco:SCCO_000036 .
         }
         BIND (STRAFTER(STR(?surechembl_disease), "http://rdf.ebi.ac.uk/resource/surechembl/indication/") AS ?mesh_id)
-        FILTER (REGEX(?mesh_id, "^(C\\d{6}|D0\\d{5})$")) 
-        BIND (URI(CONCAT("http://id.nlm.nih.gov/mesh/",?mesh_id)) AS ?mesh_uri)
+        FILTER (REGEX(?mesh_id, "^(C|D)\\d{6}$"))
+        BIND (URI(CONCAT("http://identifiers.org/mesh/",?mesh_id)) AS ?mesh_uri)
 }
-
