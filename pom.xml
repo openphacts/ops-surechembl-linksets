@@ -63,12 +63,12 @@
     <repository>
         <id>b6e18a12df08</id>
         <name>b6e18a12df08-releases</name>
-        <url>http://data.openphacts.org/artifactory/data-maven</url>
+        <url>https://repository.mygrid.org.uk/artifactory/ops/</url>
     </repository>
     <snapshotRepository>
         <id>b6e18a12df08</id>
         <name>b6e18a12df08-snapshots</name>
-        <url>http://data.openphacts.org/artifactory/data-maven-dev</url>
+        <url>https://repository.mygrid.org.uk/artifactory/ops/</url>
     </snapshotRepository>
   </distributionManagement>
 
@@ -77,19 +77,8 @@
     <repository>
       <id>ops-data</id>
       <name>Open PHACTS data repository</name>
-      <url>http://data.openphacts.org/artifactory/data-maven</url>
+      <url>https://repository.mygrid.org.uk/artifactory/ops/</url>
       <releases />
-      <snapshots>
-	<enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>ops-data-dev</id>
-      <name>Open PHACTS data snapshot repository</name>
-      <url>http://data.openphacts.org/artifactory/data-maven-dev</url>
-      <releases>
-	<enabled>false</enabled>
-      </releases>
       <snapshots />
     </repository>
   </repositories>
